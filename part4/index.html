@@ -12,25 +12,24 @@
  $(document).ready( function() {
     $.ajax({
         type: "get",
-        url: "/json.json",
-        beforeSend: function() {$("#team").html("Loading...");},
+        url: "json.json",
+        beforeSend: function() {$("#result").html("Loading...");},
         timeout: 10000,
         error: function(xhr, status, error) {
             alert("Error: " + xhr.status + " - " + error);
         },
-        dataType: "xml",
+        dataType: "json",
         success: function(response) {
-            $("#team").html("");
-            $(response).find("management").children().each(function() {
-                $("#team").append( 
-                $(this).find("name").text() + "<br>" + 
-                $(this).find("title").text() + "<br>" + 
-                $(this).find("bio").text() + "<br><br>");
+            $("#result").html("");
+            $.each(response, function() {
+             $.each(this, function(key, value) {
+                $("#result").append(value.name + '<br>' + value.title + '<br>'+ value.bio +'<hr>');
             });
-        }
-});
+        });
+    }
 
- });
+});
+});
     </script>
 </head>
 

@@ -9,15 +9,16 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 $(document).ready(function() {
-    $.getJSON('json.json', function (data) {
-        var items = [];
-        $.each( data, function( key, val ) {
-            items.push( "<li id='" + key + "'>" + val + "</li>" );
-        });
+    $.getJSON("json.json", function(data){
+        $.each(data, function() {
+            $.each(this, function(key, value) {
+                $("#result").append(value.thing1 + '<hr>' + value.thing2 + '<hr>'  + value.thing3 + '<hr>' );
+            });
+        }); 
     });
-    items.appendTo( "#result" );
 
-})
+
+});
     </script>
 </head>
 
